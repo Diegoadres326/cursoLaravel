@@ -36,7 +36,7 @@ if($op==2){
 			}
 if($op==3){
 //$productos=Product::orderBy('precio','desc');
- $productos=Product::select('*')->orderBy('precio','desc')->get();
+ $productos=Product::select('*')->orderBy('cantidad','desc')->get();
 
 }
 
