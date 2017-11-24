@@ -4,12 +4,12 @@ use App\Product;
 use Illuminate\Http\Request;
 
 
-Route::get('/', function () {
+Route::get('/products', function () {
    
    $product1=Product::all();
-   dd($product1);
+ // dd($product1);
 
-   return view('index');
+   return view('products',['productos'=>$product1]);
 
 });
 
@@ -19,7 +19,7 @@ Route::get('welcome', function () {
 
 
 
-Route::get('/products/{op}', function ($op) {  
+Route::get('/products/{op}', function ($op) { 
 
 
 
@@ -39,6 +39,8 @@ if($op==3){
  $productos=Product::select('*')->orderBy('cantidad','desc')->get();
 
 }
+
+
 
 //$productos=Product::orderBy('precio','desc');
 	//$productos=Product::all();
