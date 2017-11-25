@@ -1,19 +1,16 @@
 @extends('layouts.app')
-
-@section('titulo',"lista de productos")
-
-
+@section('titulo','Nuevo Producto')
 @section('content')
 
 <div class="container">
 	<h3 class='text-center'>
 	PRODUCTOS
 	</h3>
-
-
 	<div class="col-md-6">
+			
 		<form action='/products' method='POST'>
 					{{csrf_field()}}
+
 				<div class='form-group'>
 					<label for='name' class='control-label'>
 						Nombre:
@@ -24,8 +21,16 @@
 					<label for='tipo_producto' class='control-label'>
 						Tipo Producto:
 					</label>
-					<input type='number' name='tipo_producto' class='form-control'>
+					<select name='tipo_producto' class='form-control'>
+						@foreach($tipoProductos as $tipo)
+							<option value="{{ $tipo->id }}">
+								{{ $tipo->nombre }}
+							</option>
+						@endforeach
+					</select>
+
 				</div>
+
 
 				<div class='form-group'>
 					<label for='cantidad' class='control-label'>
@@ -52,45 +57,4 @@
 				</div>
 		</form>
 	</div>
-
-
-
-				<div class="col-md-6">
-						<h3>Listado de Productos</h3>
-						@if(count($productos)>0)
-						<table class='table'>
-							<thead>
-								<th>Tipo</th>
-								<th>Nombre</th>
-								<th>Cantidad</th>
-								<th>Precio</th>
-								<th>Estado</th>
-								<th>Accion</th>
-							</thead>
-							<tbody>
-							@foreach ($productos as $producto)
-								<tr>
-									<td>
-										
-										{{ $producto->tipo->nombre }} 
-								
-									</td>
-									<td>{{ $producto->name }} </td>
-									<td>{{ $producto->cantidad }} </td>
-									<td>{{ $producto->precio }} </td>
-									<td>{{ $producto->estado }} </td>
-									<td>
-										<form action='/products/{{ $producto->id  }}' method='POST'>
-											{{csrf_field()}}
-											{{ method_field('DELETE')  }}
-												<button class='btn btn-default' type='submit' >ELIMINAR</button>
-										</form>
-									</td>
-								</tr>
-							</tbody>
-							@endforeach
-						</table>
-				</div>
 </div>
-@endif
-@endsection
