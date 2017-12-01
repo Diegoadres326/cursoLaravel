@@ -10,7 +10,7 @@
 	PRODUCTOS
 	</h3>
 
-
+<!--
 	<div class="col-md-6">
 		<form action='/products' method='POST'>
 					{{csrf_field()}}
@@ -53,10 +53,11 @@
 		</form>
 	</div>
 
+ -->
 
-
-				<div class="col-md-6">
+				<div class="col-md-12">
 						<h3>Listado de Productos</h3>
+						<a href="/products/create" class="btn btn-primary"> Nuevo Producto</a>
 						@if(count($productos)>0)
 						<table class='table'>
 							<thead>
@@ -65,7 +66,8 @@
 								<th>Cantidad</th>
 								<th>Precio</th>
 								<th>Estado</th>
-								<th>Accion</th>
+								<th>Actualizar</th>
+								<th>Eliminar</th>
 							</thead>
 							<tbody>
 							@foreach ($productos as $producto)
@@ -80,10 +82,13 @@
 									<td>{{ $producto->precio }} </td>
 									<td>{{ $producto->estado }} </td>
 									<td>
+										<a class='btn btn-default' href="/products/{{ $producto->id  }}/edit"    >Actualizar</a>
+									</td>
+									<td>
 										<form action='/products/{{ $producto->id  }}' method='POST'>
 											{{csrf_field()}}
 											{{ method_field('DELETE')  }}
-												<button class='btn btn-default' type='submit' >ELIMINAR</button>
+												<button class='btn btn-danger' type='submit' >ELIMINAR</button>
 										</form>
 									</td>
 								</tr>

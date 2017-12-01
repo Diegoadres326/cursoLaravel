@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 
 
-
+/*
 Route::get('/', function () {
    //return dd(TipoProducto::find(2)->products->toArray());
    //return dd(TipoProducto::with(['products'])->where('id','>',0)->get());
@@ -21,7 +21,7 @@ Route::get('/', function () {
 
 Route::get('/ingresar', function () {
    return view('pages.ingresarProducto');
-});
+});*/
 
 //Route::get('/products', function () {
    
@@ -45,7 +45,7 @@ Route::get('/ingresar', function () {
 
 Route::resource('/products', 'ControladorProducto');
 
-
+/*
 Route::get('welcome', function () {
    return view('index');
 });
@@ -112,4 +112,4 @@ if($op==3){
 Route::delete('/products/{id}', function ($id) {  
 	Product::findOrFail($id)->delete();
 	return redirect('/products');
-});
+});*/

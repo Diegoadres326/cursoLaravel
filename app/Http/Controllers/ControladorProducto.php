@@ -26,7 +26,7 @@ class ControladorProducto extends Controller
     public function create()
     {
 
-        return view('pages.ingresarProducto',['tipoProductos'=>TipoProducto::all() ]);
+        return view('pages.ingresarProducto',['tipoProductos'=>TipoProducto::all()]);
     }
 
     /**
@@ -79,7 +79,7 @@ class ControladorProducto extends Controller
         }
 
         return redirect('/products')
-              ->with('success','¨Producto INgresado');
+              ->with('success','Producto Ingresado');
     }
 
     /**
@@ -90,7 +90,16 @@ class ControladorProducto extends Controller
      */
     public function show($id)
     {
-        //
+     //   $product1=Product::with('tipo')->get();
+       // $product1=Product::where('id', $id);
+       //dd($product1);
+       // return view('products',['productos'=>$product1]);
+
+      //$product1=Product::findOrFail($id);
+      $product1=Product::where('id',$id)->with('tipo')->get();
+      //  dd($product1);
+      //return view('pages.actualizarProducto',['producto'=>$product1]);
+      return view('products',['productos'=>$product1 ]);
     }
 
     /**
@@ -101,7 +110,11 @@ class ControladorProducto extends Controller
      */
     public function edit($id)
     {
-        //
+        
+          $product1=Product::findOrFail($id);
+           // dd($product1);
+          return view('pages.actualizarProducto',['producto'=>$product1],['tipoProductos'=>TipoProducto::all()]);
+
     }
 
     /**
@@ -113,7 +126,17 @@ class ControladorProducto extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+            $producto=Product::findOrFail($id);
+            $producto->name=$request->name;
+            $producto->cantidad=$request->cantidad;
+            $producto->precio=$request->precio;
+            $producto->estado=$request->estado;
+            $producto->tipo_producto=$request->tipo_producto;
+            $producto->save();
+
+
+        return redirect('/products')
+              ->with('success','Producto Actualizado');
     }
 
     /**
@@ -125,5 +148,8 @@ class ControladorProducto extends Controller
     public function destroy($id)
     {
         //
+            Product::findOrFail($id)->delete();
+            return redirect('/products')
+               ->with('success','Se a eliminado un producto');
     }
 }
