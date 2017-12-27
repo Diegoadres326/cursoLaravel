@@ -44,13 +44,14 @@ Route::get('/ingresar', function () {
 //Route::get('/products', 'ControladorProducto@index');
 
 Route::resource('/products', 'ControladorProducto');
+Route::resource('/tipo', 'tipoControlador');
+
+
+//Route::get('welcome', function () {
+  // return view('index');
+//});
 
 /*
-Route::get('welcome', function () {
-   return view('index');
-});
-
-
 
 Route::get('/products/{op}', function ($op) { 
 if($op==1){
